@@ -98,7 +98,7 @@ namespace WebApplicationProoductCrud.Controllers
             ViewBag.FabProd = new List<String>() { "Nestle", "Coca" };
             ViewBag.Nestle = new List<String>() { "Achocolatado", "Bombom" };
             ViewBag.Coca = new List<String>() { "Coca cola", "Sprite" };
-            return View(product);
+            return View();
         }
 
         // POST: Products/Edit/5
