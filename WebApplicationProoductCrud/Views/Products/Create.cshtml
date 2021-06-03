@@ -1,0 +1,83 @@
+﻿@model WebApplicationProoductCrud.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeProd" class="control-label"></label>
+                <input asp-for="NomeProd" class="form-control" />
+                <span asp-validation-for="NomeProd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomeFabri" class="control-label"></label>
+                <select id="SelectFab" asp-for="NomeFabri" class="form-control" asp-items="new SelectList(ViewBag.FabProd)">
+                    <option selected disabled>Selecione</option>
+                </select>
+                <span asp-validation-for="NomeFabri" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="SelectNes">
+                <label asp-for="CategoryProd" class="control-label"></label>
+                <select  asp-for="CategoryProd" class="form-control" asp-items="new SelectList(ViewBag.Nestle)">
+                    <option selected disabled>Selecione</option>
+                </select>
+           
+                <span asp-validation-for="CategoryProd" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="SelectCoca">
+                <label asp-for="CategoryProd" class="control-label"></label>
+               
+                <select asp-for="CategoryProd" class="form-control" asp-items="new SelectList(ViewBag.Coca)">
+                    <option selected disabled>Selecione</option>
+                </select>
+                <span asp-validation-for="CategoryProd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QtdProd" class="control-label"></label>
+                <input asp-for="QtdProd" class="form-control" />
+                <span asp-validation-for="QtdProd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValueProd" class="control-label"></label>
+                <input asp-for="ValueProd" class="form-control" />
+                <span asp-validation-for="ValueProd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script>
+    const select1 = document.getElementById("SelectCoca");
+    const select2 = document.getElementById("SelectNes");
+
+    document.getElementById("SelectFab").addEventListener("change", (value) => {
+        console.log(value.currentTarget.value);
+        if (value.currentTarget.value === 'Nestle' || value.currentTarget.value === 'Nestlé') {
+            select1.style.display = 'none';
+            select2.style.display = 'block';
+        } else {
+            select1.style.display = 'block';
+            select2.style.display = 'none';
+        }
+    });
+
+    select1.style.display = 'none';
+    select2.style.display = 'none';
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
